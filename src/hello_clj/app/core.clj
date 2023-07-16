@@ -19,9 +19,7 @@
 (defn new-application
   [config]
   (component/using (map->Application {:config config})
-                   [
-                    ;:database
-                    ]))
+                   [:database]))
 
 (defn handler [request]
   {:status  200

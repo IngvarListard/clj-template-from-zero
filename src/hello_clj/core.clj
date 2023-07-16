@@ -2,7 +2,8 @@
   (:gen-class)
   (:require [com.stuartsierra.component :as component]
             [hello-clj.app.core :refer [app-handler new-application]]
-            [hello-clj.web-server :refer [new-web-server]]))
+            [hello-clj.web-server :refer [new-web-server]]
+            [hello-clj.db :refer [setup-database]]))
 
 (defn new-system
   "Build a default system to run. In the REPL:
@@ -17,7 +18,7 @@
   ([port] (new-system port true))
   ([port repl]
    (component/system-map :application (new-application {:repl repl})
-                         ;:database    (model/setup-database)
+                         :database    (setup-database)
                          :web-server (new-web-server #'app-handler port))))
 
 (defonce ^:private repl-system (atom nil))
@@ -33,4 +34,11 @@
         ;; connected to this application:
         (->> (reset! repl-system))
         ;; then wait "forever" on the promise created:
-        :web-server :shutdown deref)))
+        ;:web-server :shutdown deref
+        )))
+
+(comment
+  (require '[next.jdbc.sql :as sql])
+  (sql/query (-> @repl-system :database :datasource) ["select 1"])
+
+  )

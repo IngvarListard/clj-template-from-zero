@@ -9,7 +9,11 @@
                  [ring/ring-defaults "0.3.4"]
                  [compojure "1.7.0"]
                  [com.stuartsierra/component "1.1.0"]
-                 [rum "0.12.10"]]
+                 [rum "0.12.10"]
+                 [com.github.seancorfield/next.jdbc "1.3.883"]
+                 [com.mchange/c3p0 "0.9.5.5"]
+                 [com.github.seancorfield/honeysql "2.4.1011"]
+                 [org.xerial/sqlite-jdbc "3.39.3.0"]]
   :main ^:skip-aot hello-clj.core
   :resource-paths ["resources"
                    "target/resources"]
